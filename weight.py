@@ -191,7 +191,7 @@ def get_weight(manual):
         import time
         timeout = time.time()
         weighting=1
-        ser = serial.Serial(port='COM3', timeout=1, xonxoff=True)
+        ser = serial.Serial(port='COM4', timeout=1, xonxoff=True)
         
         while weighting:
             print('Waiting reading from the scale, please press print.')
