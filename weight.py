@@ -200,6 +200,7 @@ def get_weight(manual):
             reading = ser.readline()
             if reading:
                 weight = float(str(reading).split('\\')[0][2:])
+                overtime=0
                 weighting=0
                 ser.close()
             elif time.time()-timeout > 30:
