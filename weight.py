@@ -309,7 +309,6 @@ if __name__ == "__main__":
                 _entering = 1
             else:
                 _entering = 0
-                pass
     
         if _entering:
             row_working = get_working_row(date)
@@ -321,22 +320,21 @@ if __name__ == "__main__":
             #input for deprived date
             elif row_deprive == row_working:
                 working_weight, manual = get_weight(manual)
-                sheet.cell(row=row_working, column=4).value = working_weight
+                if working_weight == None or 1 > working_weight > 100:
+                    print("Abnormal derpive Weight")       
+                else:
+                    sheet.cell(row=row_working, column=4).value = working_weight
             #input for traning date
             else:
                 weight_deprive = float(sheet.cell(row=row_deprive, column=4).value)
                 
-                if weight_deprive == None or 0 > weight_deprive > 100:
-                    _entering = 0
-                    raise ValueError('Abnormal Weight on Deprived Date')                  
-                    break
+                if weight_deprive == None or 1 > weight_deprive > 100:
+                    print("Abnormal derpive Weight")                 
                 else:
                     weight_working, manual= get_weight(manual)
                     
-                    if weight_working == None or 0 > weight_working > 100:
-                        _entering = 0
-                        raise ValueError('Abnormal Weight')
-                        break
+                    if weight_working == None or 1 >= weight_working >= 100:
+                        print("Abnormal Weight")
                     else:
                         sheet.cell(row=row_working, column=4).value = weight_working
                         ratio = weight_working/weight_deprive                  
