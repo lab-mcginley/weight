@@ -331,8 +331,21 @@ if __name__ == "__main__":
                     sheet.cell(row=row_working, column=4).value = working_weight
             #input for traning date
             else:
-                weight_deprive = float(sheet.cell(row=row_deprive, column=4).value)
-                
+                try:
+                    weight_deprive = float(sheet.cell(row=row_deprive, column=4).value)
+                except:
+                    print("No deprive weight detected")
+                    add_deprive = input("Please enter deprive weight or enter STOP to abort: ")
+                    if add_deprive.upper() == 'STOP':
+                        break
+                    else:
+                        try:
+                            weight_deprive = float(add_deprive)
+                            print(f"Using {weight_deprive} as deprive weight, please manually add it to the excel file later")
+                        except:
+                            print("Not getting the right numer")
+                            break
+                    
                 if weight_deprive == None or 1 > weight_deprive > 100:
                     print("Abnormal derpive Weight")                 
                 else:
