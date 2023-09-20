@@ -227,6 +227,7 @@ def get_weight(manual):
                 return float(weight), manual
         else:
             print("Abnormal weight from scale")
+            return float(weight), manual
         
     elif manual:
         weight = input("Please input mouse wight in g: ")
