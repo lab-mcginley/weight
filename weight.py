@@ -4,6 +4,7 @@ from datetime import date as Date
 import os
 from calendar import Calendar
 import serial
+import time
 
 def date_working(today) ->str:
     check_date = 0
@@ -189,7 +190,6 @@ def new_sheet(mouseID, year):
 
 def get_weight(manual):
     if not manual:
-        import time
         timeout = time.time()
         weighting=1
         ser = serial.Serial(port='COM3', timeout=1, xonxoff=True)
@@ -338,14 +338,16 @@ if __name__ == "__main__":
                 except:
                     print("No deprive weight detected")
                     add_deprive = input("Please enter deprive weight or enter STOP to abort: ")
+                    
                     if add_deprive.upper() == 'STOP':
                         break
                     else:
                         try:
                             weight_deprive = float(add_deprive)
                             print(f"Using {weight_deprive} as deprive weight, please manually add it to the excel file later")
+                            time.sleep(2)
                         except:
-                            print("Not getting the right numer")
+                            print("Not getting the right number")
                             break
                     
                 if weight_deprive == None or 1 > weight_deprive > 100:
