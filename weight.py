@@ -153,6 +153,7 @@ def get_deprive_row(date, sheet) ->int:
 
 def new_sheet(mouseID, year):
     wb.create_sheet(mouseID)
+    
     sheet = wb[mouseID]
     sheet.append(['Date', 'Days', 'Deprive', 'Mass (g)', '',
                   '% of weight on deprived day', 'FEED (g)'])
@@ -207,7 +208,7 @@ def get_weight(manual):
                 weight=0
                 ser.close()
                               
-        if weight:
+        if 100 > weight > 1:
             print(f'Mouse weight: {weight} g')
             manual=0
             return float(weight), manual
@@ -223,6 +224,9 @@ def get_weight(manual):
                 close_ser(ser)
                 weight, manual = get_weight(manual)               
                 return float(weight), manual
+        else:
+            print("Abnormal weight from scale")
+        
     elif manual:
         weight = input("Please input mouse wight in g: ")
         if 'ser' in locals():
@@ -277,6 +281,7 @@ if __name__ == "__main__":
     else:
         print(f"\n{file} does not exist, creating new entry.\n")
         wb = Workbook()
+        new_sheet('template', year)
     
     
     print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
