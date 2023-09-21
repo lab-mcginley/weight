@@ -328,7 +328,7 @@ if __name__ == "__main__":
             elif row_deprive == row_working:
                 working_weight, manual = get_weight(manual)
                 if working_weight == None or 1 > working_weight > 100:
-                    print("Abnormal derpive Weight")       
+                    print(f"WARNING: Abnormal derpive Weight at {working_weight}")       
                 else:
                     sheet.cell(row=row_working, column=4).value = working_weight
             #input for traning date
@@ -336,7 +336,7 @@ if __name__ == "__main__":
                 try:
                     weight_deprive = float(sheet.cell(row=row_deprive, column=4).value)
                 except:
-                    print("No deprive weight detected")
+                    print("WARNING: No deprive weight detected")
                     add_deprive = input("Please enter deprive weight or enter STOP to abort: ")
                     
                     if add_deprive.upper() == 'STOP':
@@ -347,16 +347,16 @@ if __name__ == "__main__":
                             print(f"Using {weight_deprive} as deprive weight, please manually add it to the excel file later")
                             time.sleep(2)
                         except:
-                            print("Not getting the right number")
+                            print("WARNING: Not getting the right number")
                             break
                     
                 if weight_deprive == None or 1 > weight_deprive > 100:
-                    print("Abnormal derpive Weight")                 
+                    print(f"WARNING: Abnormal derpive Weight at {weight_deprive}")                 
                 else:
                     weight_working, manual= get_weight(manual)
                     
                     if weight_working == None or 1 >= weight_working >= 100:
-                        print("Abnormal Weight")
+                        print(f"WARNING: Abnormal weight at {weight_working} g")
                     else:
                         sheet.cell(row=row_working, column=4).value = weight_working
                         ratio = weight_working/weight_deprive                  
