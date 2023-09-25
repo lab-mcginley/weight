@@ -311,7 +311,9 @@ if __name__ == "__main__":
         else:
             print("Mouse with this ID doesn't exist, create new sheet for it?")
             ans = input("YES=1 / NO=0: ")
-            if int(ans):
+            if ans != '0' or ans != '1':
+                ans = input("Please enter 1 for Yes or 0 for No: ")
+            elif int(ans):
                 sheet = new_sheet(mouseID, year)
                 _entering = 1
             else:
