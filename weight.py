@@ -257,6 +257,7 @@ def record_feeding(row_working, ratio, feed):
     sheet.cell(row=row_working, column=6).value = float('%.2f'%(ratio*100))
     sheet.cell(row=row_working, column=6).alignment = Alignment(horizontal='center')
     sheet.cell(row=row_working, column=7).value = float('%.1f'%feed)
+    wb.save(file)
     
 def fill_red():
     fill = PatternFill(start_color='80FF0000',
@@ -367,7 +368,7 @@ if __name__ == "__main__":
                         
                         print(f"Please feed {feed} g.\n")
                         record_feeding(row_working, ratio, feed)
-                
+                        
             
 
     wb.save(file)
