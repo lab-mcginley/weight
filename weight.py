@@ -311,7 +311,7 @@ if __name__ == "__main__":
         else:
             print("Mouse with this ID doesn't exist, create new sheet for it?")
             ans = input("YES=1 / NO=0: ")
-            while ans != '0' or ans != '1':
+            while ans != '0' and ans != '1':
                 ans = input("Please enter 1 for Yes or 0 for No: ")
             
             if int(ans):
