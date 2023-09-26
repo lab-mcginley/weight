@@ -5,8 +5,6 @@ import os
 from calendar import Calendar
 import serial
 import time
-import logging
-
 
 def date_working(today) ->str:
     check_date = 0
@@ -212,7 +210,7 @@ def get_weight(manual):
                 ser.close()
                               
         if 100 > weight > 1:
-            #print(f'Mouse weight: {weight} g')
+            print(f'Mouse weight: {weight} g')
             manual=0
             return float(weight), manual
         
@@ -275,9 +273,6 @@ def close_ser(ser):
 
 
 if __name__ == "__main__":
-    handlers = [logging.FileHandler('logs.log'), logging.StreamHandler()]
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s-> %(message)s', handlers=handlers)
-    
     today = Date.today()
     date = date_working(today)
     year = check_lastday(date)
@@ -337,7 +332,7 @@ if __name__ == "__main__":
             elif row_deprive == row_working:
                 working_weight, manual = get_weight(manual)
                 if working_weight == None or 1 > working_weight > 100:
-                    logging.warning(f"WARNING: Abnormal derpive Weight at {working_weight}")       
+                    print(f"WARNING: Abnormal derpive Weight at {working_weight}")       
                 else:
                     sheet.cell(row=row_working, column=4).value = working_weight
             #input for traning date
@@ -345,7 +340,7 @@ if __name__ == "__main__":
                 try:
                     weight_deprive = float(sheet.cell(row=row_deprive, column=4).value)
                 except:
-                    logging.warning("WARNING: No deprive weight detected")
+                    print("WARNING: No deprive weight detected")
                     add_deprive = input("Please enter deprive weight or enter STOP to abort: ")
                     
                     if add_deprive.upper() == 'STOP':
@@ -353,29 +348,29 @@ if __name__ == "__main__":
                     else:
                         try:
                             weight_deprive = float(add_deprive)
-                            logging.info(f"Using {weight_deprive} as deprive weight, please manually add it to the excel file later")
+                            print(f"Using {weight_deprive} as deprive weight, please manually add it to the excel file later")
                             time.sleep(2)
                         except:
                             print("WARNING: Not getting the right number")
                             break
                     
                 if weight_deprive == None or 1 > weight_deprive > 100:
-                    logging.warning(f"WARNING: Abnormal derpive Weight at {weight_deprive}")                 
+                    print(f"WARNING: Abnormal derpive Weight at {weight_deprive}")                 
                 else:
                     weight_working, manual= get_weight(manual)
                     
                     if weight_working == None or 1 >= weight_working >= 100:
-                        logging.warning(f"WARNING: Abnormal weight at {weight_working} g")
+                        print(f"WARNING: Abnormal weight at {weight_working} g")
                     else:
                         sheet.cell(row=row_working, column=4).value = weight_working
                         ratio = weight_working/weight_deprive                  
                         feed = feed_amout(ratio)
-                        logging.info(f'{mouseID} weight: {weight_working}')
-                        logging.info(f"Please feed {feed} g.\n")
+                        
+                        print(f"Please feed {feed} g.\n")
                         record_feeding(row_working, ratio, feed)
                         
-                                   
-    logging.shutdown()
+            
+
     wb.save(file)
 
 
