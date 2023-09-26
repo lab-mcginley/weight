@@ -212,7 +212,7 @@ def get_weight(manual):
                 ser.close()
                               
         if 100 > weight > 1:
-            print(f'Mouse weight: {weight} g')
+            #print(f'Mouse weight: {weight} g')
             manual=0
             return float(weight), manual
         
