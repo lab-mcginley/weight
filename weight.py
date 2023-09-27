@@ -275,8 +275,11 @@ def close_ser(ser):
 
 
 if __name__ == "__main__":
-    handlers = [logging.FileHandler('logs.log'), logging.StreamHandler()]
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s-> %(message)s', handlers=handlers)
+    console = logging.StreamHandler()
+    formatter = logging.Formatter('%(message)s')
+    console.setFormatter(formatter)
+    handlers = [logging.FileHandler('logs.log'), console]
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s-> %(message)s', datefmt='%Y/%m/%d-%H:%M', handlers=handlers)
     
     today = Date.today()
     date = date_working(today)
