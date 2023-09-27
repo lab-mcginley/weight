@@ -219,6 +219,9 @@ def get_weight(manual):
         elif overtime:
             manual = int(input("Not getting weight from the scale, do you wish to manually enter mouse weight? (1:YES / 0:NO): "))
             
+            while manual != 0 and manual != 1:
+                manual = int(input("please only enter 0 or 1: "))
+            
             if manual:
                 weight = input("Please input mouse weight in g: ")
                 close_ser(ser)
@@ -294,12 +297,14 @@ if __name__ == "__main__":
         wb = Workbook()
         new_sheet('template', year)
     
+    logging.info(f"Entering for {date}, save with {file}")
     
     print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
     print('If wish to manualy key in mouse weight, entering: MANUAL')
     print('When finished, save by entering: STOP')
-    print('**Be sure to close excel file before stop**')
+    print(f'**Be sure to close {file} before recording mouse weight**')
     print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+    
     manual = 0 
     mouseID = ()
     while mouseID != 'STOP':
@@ -321,7 +326,7 @@ if __name__ == "__main__":
             print("Mouse with this ID doesn't exist, create new sheet for it?")
             ans = input("YES=1 / NO=0: ")
             while ans != '0' and ans != '1':
-                ans = input("Please enter 1 for Yes or 0 for No: ")
+                ans = input("Please only enter 0 or 1: ")
             
             if int(ans):
                 sheet = new_sheet(mouseID, year)
@@ -373,7 +378,7 @@ if __name__ == "__main__":
                         sheet.cell(row=row_working, column=4).value = weight_working
                         ratio = weight_working/weight_deprive                  
                         feed = feed_amout(ratio)
-                        logging.info(f'{mouseID} weight: {weight_working}')
+                        logging.info(f'ID: {mouseID}, Weight: {weight_working} g')
                         logging.info(f"Please feed {feed} g.\n")
                         record_feeding(row_working, ratio, feed)
                         
