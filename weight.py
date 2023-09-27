@@ -345,9 +345,10 @@ if __name__ == "__main__":
             elif row_deprive == row_working:
                 working_weight, manual = get_weight(manual)
                 if working_weight == None or 1 > working_weight > 100:
-                    logging.warning(f"WARNING: Abnormal derpive Weight at {working_weight}")       
+                    logging.warning(f"WARNING: Abnormal derpive Weight at {working_weight} g")       
                 else:
                     sheet.cell(row=row_working, column=4).value = working_weight
+                    logging.info(f"ID: {mouseID}, Deprive Weight: {working_weight} g")
             #input for traning date
             else:
                 try:
@@ -361,7 +362,7 @@ if __name__ == "__main__":
                     else:
                         try:
                             weight_deprive = float(add_deprive)
-                            logging.info(f"Using {weight_deprive} as deprive weight, please manually add it to the excel file later")
+                            logging.info(f"Using {weight_deprive} g as deprive weight for {mouseID}, please manually add it to the excel file later")
                             time.sleep(2)
                         except:
                             print("WARNING: Not getting the right number")
