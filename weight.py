@@ -184,7 +184,7 @@ def new_sheet(mouseID, year):
         sheet.cell(row=i, column=3).alignment = Alignment(horizontal='center')
                     
     sheet['A1'] = 'ID'
-    sheet['B1'] = mouseID
+    sheet['C1'] = mouseID
     """Width nunber*10 = Pixel in excel"""
     sheet.column_dimensions['A'].width = 13
     sheet.column_dimensions['B'].width = 8
