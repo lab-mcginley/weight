@@ -82,8 +82,10 @@ def get_calendar(year):
         dates = [dd.isoformat() for ii,dd in enumerate(day_list) if day_zero[ii]!=0]
         yearly.append(dates)
     
+    #December list is to get full week calender if last week containes dates in Janurary
+    #But November in the first week need to be remove or it will be duplicated   
     dec_list = list(c.itermonthdates(year,12))
-    yearly.append([i.isoformat() for i in dec_list])
+    yearly.append([i.isoformat() for i in dec_list if i.month != 11])
     
     yearly = [daily for monthly in yearly for daily in monthly]
     
